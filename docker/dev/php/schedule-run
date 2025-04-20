@@ -1,0 +1,2 @@
+0 */72 * * *  php /code/bin/console localization:update
+* * * * * php /var/www/code/bin/console bot:webhook_url:actualize

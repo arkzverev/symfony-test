@@ -1,0 +1,10 @@
+rest_client_create:
+    path: /client
+    controller: App\ClientContext\Facade\Actions\CreateClientActionController::v1
+    methods: POST
+
+rest_credit_create:
+    path: /credit
+    controller: App\CreditContext\Facade\Actions\CreateClientActionController::v1
+    methods: POST
+
