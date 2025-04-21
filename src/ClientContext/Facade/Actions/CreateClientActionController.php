@@ -13,23 +13,16 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\SerializerInterface;
 use Webmozart\Assert\Assert;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 use App\CommonContext\Validator\RequestJsonValidator;
 
 final class CreateClientActionController extends BaseRestController
 {
-    private ClientService $clientService;
-
     public function __construct(
-        RequestJsonValidator $validator,
-        SerializerInterface $serializer,
-        LoggerInterface $logger,
-        ClientService $clientService,
+        private RequestJsonValidator $validator,
+        private SerializerInterface $serializer,
+        private LoggerInterface $logger,
+        private ClientService $clientService,
     ) {
-        $this->validator = $validator;
-        $this->serializer = $serializer;
-        $this->logger = $logger;
-        $this->clientService = $clientService;
     }
 
     public function v1(Request $request): Response

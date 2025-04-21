@@ -8,14 +8,27 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class CreateCreditDto
 {
-    public $name;
+    #[Assert\NotBlank]
+    #[Assert\Type('string')]
+    public string $title;
 
-    public $amount;
+    #[Assert\NotBlank]
+    #[Assert\Type('float')]
+    public float $amount;
 
-    public $rate;
+    #[Assert\NotBlank]
+    #[Assert\Type('float')]
+    public float $rate;
 
-    public $startDate;
+    #[Assert\NotBlank]
+    #[Assert\DateTime]
+    public string $startDate;
 
-    public $endDate;
+    #[Assert\NotBlank]
+    #[Assert\DateTime]
+    public string $endDate;
 
+    #[Assert\NotBlank]
+    #[Assert\Type('string')]
+    public string $clientPin;
 }

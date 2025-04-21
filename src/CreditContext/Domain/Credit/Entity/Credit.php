@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\CreditContext\Domain\Credit\Entity;
 
-use App\CreditContext\Credit\Entity\Lifetime;
+use DateTimeImmutable;
 use App\CreditContext\Domain\Credit\Entity\Values\Amount;
 use App\CreditContext\Domain\Credit\Entity\Values\Rate;
 use App\CreditContext\Domain\Credit\Entity\Values\Title;
@@ -15,7 +15,8 @@ final class Credit
         private Title    $title,
         private Amount   $amount,
         private Rate     $rate,
-        private Lifetime $lifetime,
+        private DateTimeImmutable $startDate,
+        private DateTimeImmutable $endDate,
     ) {
     }
 
@@ -34,10 +35,18 @@ final class Credit
         return $this->rate;
     }
 
-    public function getLifetime(): Lifetime
+    public function getStartDate(): DateTimeImmutable
     {
-        return $this->lifetime;
+        return $this->startDate;
     }
 
+    public function getEndDate(): DateTimeImmutable
+    {
+        return $this->endDate;
+    }
 
+    public function setRate(Rate $rate): void
+    {
+        $this->rate = $rate;
+    }
 }

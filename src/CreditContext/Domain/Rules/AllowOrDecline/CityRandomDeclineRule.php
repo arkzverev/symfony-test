@@ -6,7 +6,7 @@ namespace App\CreditContext\Domain\Rules\AllowOrDecline;
 
 use App\CreditContext\Domain\Client\Entity\Client;
 use App\CreditContext\Domain\Client\Entity\Values\City;
-use App\CreditContext\Domain\Rules\Interface\AllowOrDeclineRuleInterface;
+use App\CreditContext\Domain\Interface\AllowOrDeclineRuleInterface;
 
 class CityRandomDeclineRule implements AllowOrDeclineRuleInterface
 {
@@ -29,5 +29,10 @@ class CityRandomDeclineRule implements AllowOrDeclineRuleInterface
         }
 
         return false;
+    }
+
+    public function getReason(): string
+    {
+        return "You city now not available";
     }
 }

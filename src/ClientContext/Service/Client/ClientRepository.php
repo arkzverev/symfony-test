@@ -8,6 +8,7 @@ use App\ClientContext\Domain\Client\Entity\Values\Pin;
 use App\ClientContext\Domain\Client\Repository\ClientRepositoryInterface;
 use App\ClientContext\Infrastructure\Database\ClientStorage;
 use App\ClientContext\Domain\Client\Entity\Client;
+use Throwable;
 
 class ClientRepository implements ClientRepositoryInterface
 {
@@ -16,18 +17,24 @@ class ClientRepository implements ClientRepositoryInterface
     ){
     }
 
-    public function create(Client $client): void
+    public function create(Client $client): bool
     {
-        $this->clientStorage->create($client);
+        try {
+            $this->clientStorage->insert();
+            return true;
+        } catch (Throwable $e) {
+            $this->logger->error('Error create credit datbase: ' . $e->getMessage());
+            return false;
+        }
     }
 
     public function findAll(): array
     {
-        return $this->clientStorage->findAll();
+        return $this->clientStorage->fetchAll();
     }
 
     public function findByPin(Pin $pin): Client
     {
-        return $this->clientStorage->findByPin($pin);
+        return $this->clientStorage->find(['pin' => $pin->getValue()]);
     }
 }

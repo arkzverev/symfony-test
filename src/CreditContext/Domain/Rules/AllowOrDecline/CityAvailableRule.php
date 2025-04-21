@@ -6,7 +6,7 @@ namespace App\CreditContext\Domain\Rules\AllowOrDecline;
 
 use App\CreditContext\Domain\Client\Entity\Client;
 use App\CreditContext\Domain\Client\Entity\Values\City;
-use App\CreditContext\Domain\Rules\Interface\AllowOrDeclineRuleInterface;
+use App\CreditContext\Domain\Interface\AllowOrDeclineRuleInterface;
 
 class CityAvailableRule implements AllowOrDeclineRuleInterface
 {
@@ -21,5 +21,10 @@ class CityAvailableRule implements AllowOrDeclineRuleInterface
     {
         $clientCity = $this->client->getCity()->getValue();
         return in_array($clientCity, $this->cities, true);
+    }
+
+    public function getReason(): string
+    {
+        return "You city now not available";
     }
 }

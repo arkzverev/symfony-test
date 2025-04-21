@@ -13,12 +13,13 @@ use App\ClientContext\Domain\Client\Entity\Values\Email;
 use App\ClientContext\Domain\Client\Entity\Values\Phone;
 use App\ClientContext\Domain\Client\Entity\Values\Score;
 use App\ClientContext\Domain\Client\Entity\Values\Income;
+use App\ClientContext\Domain\Client\Repository\ClientRepositoryInterface;
 use App\ClientContext\Facade\Dto\CreateClientDto;
 
 class ClientService
 {
     public function __construct(
-        private ClientRepository $clientRepository,
+        private ClientRepositoryInterface $clientRepository,
     ) {
     }
 

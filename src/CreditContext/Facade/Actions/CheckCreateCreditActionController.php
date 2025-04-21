@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\SerializerInterface;
 use Webmozart\Assert\Assert;
 
-final class CreateCreditActionController extends BaseRestController
+final class CheckCreateCreditActionController extends BaseRestController
 {
     public function __construct(
         private RequestJsonValidator $validator,
@@ -35,17 +35,17 @@ final class CreateCreditActionController extends BaseRestController
         }
 
         Assert::keyExists($result, 'dto');
-        $checkResult = $this->creditService->createCredit($result['dto']);
+        $checkResult = $this->creditService->checkCreateCredit($result['dto']);
         if (!$checkResult['status']) {
             return $this->createResponse(
-                ['status' => false],
-                Response::HTTP_BAD_REQUEST,
+                $checkResult,
+                Response::HTTP_OK,
             );
         }
 
         return $this->createResponse(
-            ['status' => true],
-            Response::HTTP_CREATED,
+            ['canCreateCredit' => true],
+            Response::HTTP_OK,
         );
     }
 }

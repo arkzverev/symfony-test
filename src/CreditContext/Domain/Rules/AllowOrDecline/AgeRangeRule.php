@@ -6,7 +6,7 @@ namespace App\CreditContext\Domain\Rules\AllowOrDecline;
 
 use App\CreditContext\Domain\Client\Entity\Client;
 use App\CreditContext\Domain\Client\Entity\Values\Age;
-use App\CreditContext\Domain\Rules\Interface\AllowOrDeclineRuleInterface;
+use App\CreditContext\Domain\Interface\AllowOrDeclineRuleInterface;
 
 class AgeRangeRule implements AllowOrDeclineRuleInterface
 {
@@ -21,5 +21,10 @@ class AgeRangeRule implements AllowOrDeclineRuleInterface
     {
         $checkAge = $this->client->getAge()->getValue();
         return $checkAge >= $this->minimalAge->getValue() && $checkAge <= $this->maximalAge->getValue();
+    }
+
+    public function getReason(): string
+    {
+        return sprintf("Age must be from %s to %s", $this->minimalAge->getValue(), $this->maximalAge->getValue());
     }
 }

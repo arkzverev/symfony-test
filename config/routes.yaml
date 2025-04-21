@@ -5,6 +5,11 @@ rest_client_create:
 
 rest_credit_create:
     path: /credit
-    controller: App\CreditContext\Facade\Actions\CreateClientActionController::v1
+    controller: App\CreditContext\Facade\Actions\CreateCreditActionController::v1
+    methods: POST
+
+rest_check_credit_create:
+    path: /credit/check
+    controller: App\CreditContext\Facade\Actions\CheckCreateCreditActionController::v1
     methods: POST
 

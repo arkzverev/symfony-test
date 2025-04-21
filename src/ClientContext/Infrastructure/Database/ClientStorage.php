@@ -4,24 +4,22 @@ declare(strict_types=1);
 
 namespace App\ClientContext\Infrastructure\Database;
 
-use App\ClientContext\Domain\Client\Entity\Values\Pin;
-use App\ClientContext\Domain\Client\Repository\ClientRepositoryInterface;
 use App\ClientContext\Domain\Client\Entity\Client;
 
-class ClientStorage implements ClientRepositoryInterface
+class ClientStorage
 {
-    public function create(Client $client): void
+    public function insert(): void
     {
         // save new client
     }
 
-    public function findAll(): array
+    public function fetchAll(): array
     {
         // get all rows
         return [];
     }
 
-    public function findByPin(Pin $pin): Client
+    public function find(array $filter = []): array
     {
         // find by pin
         return new Client();

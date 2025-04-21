@@ -9,7 +9,7 @@ use App\ClientContext\Domain\Client\Entity\Client;
 
 interface ClientRepositoryInterface
 {
-    public function create(Client $client): void;
+    public function create(Client $client): bool;
 
     public function findAll(): array;
 
