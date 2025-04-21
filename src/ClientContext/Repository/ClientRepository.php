@@ -8,12 +8,14 @@ use App\ClientContext\Domain\Client\Entity\Client;
 use App\ClientContext\Domain\Client\Entity\Values\Pin;
 use App\ClientContext\Domain\Client\Repository\ClientRepositoryInterface;
 use App\ClientContext\Infrastructure\Database\ClientStorage;
+use Psr\Log\LoggerInterface;
 use Throwable;
 
 class ClientRepository implements ClientRepositoryInterface
 {
     public function __construct(
-        private ClientStorage $clientStorage
+        private ClientStorage $clientStorage,
+        private LoggerInterface $logger,
     ){
     }
 

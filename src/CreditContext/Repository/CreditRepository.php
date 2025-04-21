@@ -6,9 +6,13 @@ namespace App\CreditContext\Repository;
 
 use App\CreditContext\Domain\Client\Entity\Values\Pin;
 use App\CreditContext\Domain\Credit\Entity\Credit;
+use App\CreditContext\Domain\Credit\Entity\Values\Amount;
+use App\CreditContext\Domain\Credit\Entity\Values\Rate;
+use App\CreditContext\Domain\Credit\Entity\Values\Title;
 use App\CreditContext\Domain\Credit\Repository\CreditRepositoryInterface;
 use App\CreditContext\Infrastructure\Database\CreditStorage;
 use Psr\Log\LoggerInterface;
+use DateTimeImmutable;
 use Throwable;
 
 class CreditRepository implements CreditRepositoryInterface
@@ -19,7 +23,7 @@ class CreditRepository implements CreditRepositoryInterface
     ) {
     }
 
-    public function create(Credit $client): bool
+    public function create(Credit $credit): bool
     {
         try {
             $this->creditStorage->insert();
@@ -39,6 +43,12 @@ class CreditRepository implements CreditRepositoryInterface
     public function findByClientPin(Pin $pin): Credit
     {
         // find client by pin
-        return new Credit();
+        return new Credit(
+            title: new Title('test'),
+            amount: new Amount(500),
+            rate: new Rate(5),
+            startDate: new DateTimeImmutable(),
+            endDate: new DateTimeImmutable(),
+        );
     }
 }
