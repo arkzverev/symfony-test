@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\ClientContext\Service\Client;
+namespace App\ClientContext\Repository;
 
+use App\ClientContext\Domain\Client\Entity\Client;
 use App\ClientContext\Domain\Client\Entity\Values\Pin;
 use App\ClientContext\Domain\Client\Repository\ClientRepositoryInterface;
 use App\ClientContext\Infrastructure\Database\ClientStorage;
-use App\ClientContext\Domain\Client\Entity\Client;
 use Throwable;
 
 class ClientRepository implements ClientRepositoryInterface

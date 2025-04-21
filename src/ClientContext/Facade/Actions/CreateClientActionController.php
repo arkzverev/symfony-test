@@ -6,14 +6,14 @@ namespace App\ClientContext\Facade\Actions;
 
 use App\Annotation\ReferencedResponse;
 use App\ClientContext\Facade\Dto\CreateClientDto;
-use App\ClientContext\Service\Client\ClientService;
+use App\ClientContext\Service\ClientService;
 use App\CommonContext\Controller\BaseRestController;
+use App\CommonContext\Validator\RequestJsonValidator;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\SerializerInterface;
 use Webmozart\Assert\Assert;
-use App\CommonContext\Validator\RequestJsonValidator;
 
 final class CreateClientActionController extends BaseRestController
 {

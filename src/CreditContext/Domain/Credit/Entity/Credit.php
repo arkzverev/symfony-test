@@ -20,6 +20,17 @@ final class Credit
     ) {
     }
 
+    public function exportArray(): array
+    {
+        return [
+            'title' => $this->title->getValue(),
+            'amount' => $this->amount->getValue(),
+            'rate' => $this->rate->getValue(),
+            'startDate' => $this->startDate->format('Y-m-d H:i:s'),
+            'endDate' => $this->endDate->format('Y-m-d H:i:s'),
+        ];
+    }
+
     public function getTitle(): Title
     {
         return $this->title;

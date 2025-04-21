@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\CreditContext\Service\Credit;
+namespace App\CreditContext\Service;
 
-use App\ClientContext\Domain\Client\Repository\ClientRepositoryInterface;
+use App\CreditContext\Domain\Client\Entity\Client;
+use App\CreditContext\Domain\Client\Entity\Values\Pin;
 use App\CreditContext\Domain\Client\Repository\ClientReadRepositoryInterface;
 use App\CreditContext\Domain\Credit\Entity\Credit;
-use App\CreditContext\Domain\Client\Entity\Values\Pin;
 use App\CreditContext\Domain\Credit\Entity\Values\Amount;
 use App\CreditContext\Domain\Credit\Entity\Values\Rate;
 use App\CreditContext\Domain\Credit\Entity\Values\Title;
@@ -16,6 +16,7 @@ use App\CreditContext\Domain\Interface\AllowOrDeclineRuleInterface;
 use App\CreditContext\Domain\Interface\ChangeRateInterfaceRule;
 use App\CreditContext\Domain\RulesGroup\RulesGroupDefault;
 use App\CreditContext\Facade\Dto\CreateCreditDto;
+use Psr\Log\LoggerInterface;
 
 class CreditService
 {
@@ -23,6 +24,7 @@ class CreditService
         private ClientReadRepositoryInterface $clientReadRepository,
         private CreditRepositoryInterface $creditRepository,
         private RulesGroupDefault $rulesGroup,
+        private LoggerInterface $logger,
     ){
     }
 
@@ -47,9 +49,11 @@ class CreditService
         if ($this->creditRepository->create($credit)) {
             return [
                 'status' => true,
-                'credit' => $credit,
+                'credit' => $credit->exportArray(),
             ];
         }
+
+        $this->clientNotify($client, 'Credit create');
 
         return [
             'status' => false,
@@ -95,5 +99,15 @@ class CreditService
         );
     }
 
+    private function clientNotify(Client $client, string $message): void
+    {
+        $fullMessage = sprintf(
+            '[%s] %s - %s',
+            date('Y-m-d H:i:s'),
+            $client->getName()->getValue(),
+            $message
+        );
 
+        $this->logger->info($fullMessage);
+    }
 }

@@ -7,7 +7,7 @@ namespace App\CreditContext\Facade\Actions;
 use App\CommonContext\Controller\BaseRestController;
 use App\CommonContext\Validator\RequestJsonValidator;
 use App\CreditContext\Facade\Dto\CreateCreditDto;
-use App\CreditContext\Service\Credit\CreditService;
+use App\CreditContext\Service\CreditService;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -35,16 +35,16 @@ final class CreateCreditActionController extends BaseRestController
         }
 
         Assert::keyExists($result, 'dto');
-        $checkResult = $this->creditService->createCredit($result['dto']);
-        if (!$checkResult['status']) {
+        $creditResult = $this->creditService->createCredit($result['dto']);
+        if (!$creditResult['status']) {
             return $this->createResponse(
-                ['status' => false],
+                $creditResult,
                 Response::HTTP_BAD_REQUEST,
             );
         }
 
         return $this->createResponse(
-            ['status' => true],
+            $creditResult,
             Response::HTTP_CREATED,
         );
     }

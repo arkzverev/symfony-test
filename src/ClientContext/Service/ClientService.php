@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace App\ClientContext\Service\Client;
+namespace App\ClientContext\Service;
 
 use App\ClientContext\Domain\Client\Entity\Client;
-use App\ClientContext\Domain\Client\Entity\Values\FullName;
-use App\ClientContext\Domain\Client\Entity\Values\City;
 use App\ClientContext\Domain\Client\Entity\Values\Age;
-use App\ClientContext\Domain\Client\Entity\Values\Pin;
+use App\ClientContext\Domain\Client\Entity\Values\City;
 use App\ClientContext\Domain\Client\Entity\Values\Email;
-use App\ClientContext\Domain\Client\Entity\Values\Phone;
-use App\ClientContext\Domain\Client\Entity\Values\Score;
+use App\ClientContext\Domain\Client\Entity\Values\FullName;
 use App\ClientContext\Domain\Client\Entity\Values\Income;
+use App\ClientContext\Domain\Client\Entity\Values\Phone;
+use App\ClientContext\Domain\Client\Entity\Values\Pin;
+use App\ClientContext\Domain\Client\Entity\Values\Score;
 use App\ClientContext\Domain\Client\Repository\ClientRepositoryInterface;
 use App\ClientContext\Facade\Dto\CreateClientDto;
 
@@ -26,9 +26,17 @@ class ClientService
     public function createClient(CreateClientDto $requestDto)
     {
         $client = $this->buildClientEntity($requestDto);
-        $this->clientRepository->create($client);
 
-        return $client;
+        if ($this->clientRepository->create($client)) {
+            return [
+                'status' => true,
+                'client' => $client->exportArray(),
+            ];
+        }
+
+        return [
+            'status' => false,
+        ];
     }
 
     private function buildClientEntity(CreateClientDto $requestDto): Client

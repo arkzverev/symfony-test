@@ -7,7 +7,7 @@ namespace App\CreditContext\Facade\Actions;
 use App\CommonContext\Controller\BaseRestController;
 use App\CommonContext\Validator\RequestJsonValidator;
 use App\CreditContext\Facade\Dto\CreateCreditDto;
-use App\CreditContext\Service\Credit\CreditService;
+use App\CreditContext\Service\CreditService;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

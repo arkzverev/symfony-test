@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\CreditContext\Service\Client;
+namespace App\CreditContext\Repository;
 
-use App\CreditContext\Domain\Client\Entity\Values\Pin;
 use App\CreditContext\Domain\Client\Entity\Client;
+use App\CreditContext\Domain\Client\Entity\Values\Pin;
 use App\CreditContext\Domain\Client\Repository\ClientReadRepositoryInterface;
 use App\CreditContext\Infrastructure\Database\ClientStorage;
 

@@ -7,6 +7,7 @@ namespace App\CreditContext\Infrastructure\Database;
 use App\CreditContext\Domain\Client\Entity\Client;
 use App\CreditContext\Domain\Client\Entity\Values\Age;
 use App\CreditContext\Domain\Client\Entity\Values\City;
+use App\CreditContext\Domain\Client\Entity\Values\FullName;
 use App\CreditContext\Domain\Client\Entity\Values\Income;
 use App\CreditContext\Domain\Client\Entity\Values\Pin;
 use App\CreditContext\Domain\Client\Entity\Values\Score;
@@ -17,6 +18,7 @@ class ClientStorage
     {
         // Заглушка метода, возвращает одну тестовую запись клиента
         return new Client(
+            fullName: new FullName('Ivan Ivanov'),
             age: new Age(54),
             pin: new Pin('555-777'),
             score: new Score(544),
